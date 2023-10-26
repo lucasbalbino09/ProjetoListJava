@@ -12,7 +12,15 @@ public class Agenda extends Pessoas {
             this.ListadeContatos = new ArrayList<>();
         }
 
-        public void adicionarPessoa(Funcionario funcionario) {
+        public List<Funcionario> getListadeContatos() {
+			return this.ListadeContatos;
+		}
+
+		public void setListadeContatos(List<Funcionario> listadeContatos) {
+			ListadeContatos = listadeContatos;
+		}
+
+		public void adicionarPessoa(Funcionario funcionario) {
             ListadeContatos.add(funcionario);
         }
 
@@ -48,10 +56,25 @@ public class Agenda extends Pessoas {
             });
 
             return pessoaComDepartamento;
-        }
-        
-        public double SelarioMedio(Funcionario funcionario1, Funcionario funcionario2 ,Funcionario funcionario3) {
-            return (funcionario1.getSalario() + funcionario2.getSalario() + funcionario3.getSalario()) / 3;
+        }        
+
+		public double SelarioMedio() {
+        	
+        	if (ListadeContatos.isEmpty()) {
+                return 0.0; // Retorna 0 se a lista estiver vazia para evitar divisão por zero.
+            }
+            
+            double totalSalario = 0.0;
+
+            for (Funcionario funcionario : ListadeContatos) {
+                totalSalario += funcionario.getSalario();
+            }
+
+            return totalSalario / ListadeContatos.size();
         }        
   
+		@Override
+		public String toString() {
+			return "Agenda [getListadeContatos()=" + getListadeContatos() + ", SelarioMedio()=" + SelarioMedio() + "]";
+		}
 }
