@@ -1,18 +1,21 @@
+package br.com.senac.projetoEmpresa;
 
 import java.util.List;
-import java.util.Scanner;
+
 
 public class Principal {
 
     public static void main(String[] args) {
 
         Agenda agenda = new Agenda();
-        Pessoas pessoa = new Pessoas();
-
-        Pessoas pessoa1 = new Pessoas("Maria", 23, "4551515561", "09/02/2000", "Veterinaria");
-        Pessoas pessoa2 = new Pessoas("Joao", 25, "4581515561", "09/07/1987", "Médico");
-        Pessoas pessoa3 = new Pessoas("Vitor", 24, "4551518561", "28/05/1999", "Analista");
         
+        Funcionario funcionario = new Funcionario();
+        Estudante estudante = new Estudante();
+
+        Funcionario pessoa1 = new Funcionario("Maria", 23, "4551515561", "09/02/2000", "infermeira",3300.00,"Medico","Medicina");
+        Funcionario pessoa2 = new Funcionario("Joao", 25, "4551515561", "09/02/2000", "pedreiro",1500.00,"ajudante geral","admin");
+        Funcionario pessoa3 = new Funcionario("Antonia", 32, "4551515561", "09/02/2000", "Empresario",12000.00,"","autonomo");
+       
         
         agenda.adicionarPessoa(pessoa1);
         agenda.adicionarPessoa(pessoa2);

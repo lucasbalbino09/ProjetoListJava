@@ -1,11 +1,20 @@
+package br.com.senac.projetoEmpresa;
 
-public class Pessoas {
+public abstract class Pessoas {
     
-   private String nome;
+	private String nome;
     private int idade;
     private String cpf;
     private String dataNascimento;
-    private String profissao; 
+    public String getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(String dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	private String profissao; 
 
     public Pessoas () {
 

@@ -1,17 +1,19 @@
+package br.com.senac.projetoEmpresa;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Agenda extends Pessoas {   
 
-        private List<Pessoas> ListadeContatos;
+        
+		private List<Funcionario> ListadeContatos;
 
         public Agenda() {
             this.ListadeContatos = new ArrayList<>();
         }
 
-        public void adicionarPessoa(Pessoas pessoa) {
-            ListadeContatos.add(pessoa);
+        public void adicionarPessoa(Funcionario funcionario) {
+            ListadeContatos.add(funcionario);
         }
 
         public Pessoas buscarPessoaPorNome(String nome) {
@@ -25,7 +27,7 @@ public class Agenda extends Pessoas {
         }
 
         public List<Pessoas> buscarPessoaPorProfissao(String Profissao) {
-            List<Pessoas> pessoaComProfissao = new ArrayList();
+            List<Pessoas> pessoaComProfissao = new ArrayList<Pessoas>();
 
             ListadeContatos.forEach(profissional -> {
                 if (profissional.getProfissao().equals(Profissao)) {
@@ -35,5 +37,21 @@ public class Agenda extends Pessoas {
 
             return pessoaComProfissao;
         }
+        
+        public List<Pessoas> buscarPessoaPorDepartamento(String Departamento) {
+            List<Pessoas> pessoaComDepartamento = new ArrayList<Pessoas>();
+
+            ListadeContatos.forEach(profissional -> {
+                if (profissional.getDepartamento().equals(Departamento)) {
+                	pessoaComDepartamento.add(profissional);
+                }
+            });
+
+            return pessoaComDepartamento;
+        }
+        
+        public double SelarioMedio(Funcionario funcionario1, Funcionario funcionario2 ,Funcionario funcionario3) {
+            return (funcionario1.getSalario() + funcionario2.getSalario() + funcionario3.getSalario()) / 3;
+        }        
   
 }
