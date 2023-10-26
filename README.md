@@ -2,13 +2,23 @@
 
 ```java
 
-public class Pessoas {
+package br.com.senac.projetoEmpresa;
+
+public abstract class Pessoas {
     
-   private String nome;
+	private String nome;
     private int idade;
     private String cpf;
     private String dataNascimento;
-    private String profissao; 
+    public String getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(String dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	private String profissao; 
 
     public Pessoas () {
 
@@ -52,9 +62,7 @@ public class Pessoas {
     @Override
     public String toString() {
         return "Pessoas: " + "nome=" + nome + ", idade=" + idade + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", profissao=" + profissao;
-    }  
-   
-        
+    }       
 }
 
 
