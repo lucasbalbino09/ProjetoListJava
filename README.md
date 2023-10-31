@@ -7,6 +7,19 @@ public abstract class Pessoas {
     private int idade;
     private String cpf;
     private String dataNascimento;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        if (email.contains("@")) {
+            this.email = email;
+        } else {
+            System.out.println("O email deve conter '@'. Email não atualizado.");
+        }
+    }
 
     public String getDataNascimento() {
         return dataNascimento;
@@ -51,7 +64,11 @@ public abstract class Pessoas {
     }
 
     public void setIdade(int idade) {
-        this.idade = idade;
+        if (idade > 0) {
+            this.idade = idade;
+        } else {
+            this.idade = 0;
+        }
     }
 
     public void setCpf(String cpf) {
@@ -61,6 +78,11 @@ public abstract class Pessoas {
     public void setProfissao(String profissao) {
         this.profissao = profissao;
     }
+    
+    public void atividadePrincipal() {
+    
+    }
+    
 
     @Override
     public String toString() {
@@ -70,12 +92,14 @@ public abstract class Pessoas {
 }
 
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Agenda extends Pessoas {
 
     private List<Funcionario> ListadeContatos;
+    private List<Estudante> ListadeContatosEstudantes;
 
     public Agenda() {
         this.ListadeContatos = new ArrayList<>();
@@ -102,6 +126,19 @@ public class Agenda extends Pessoas {
         }
         return null;
     }
+    
+    public List<Pessoas> buscarPessoaPorAno(int ano) {
+        List<Pessoas> pessoaPorAno = new ArrayList<Pessoas>();
+
+        ListadeContatosEstudantes.forEach(estudante -> {
+            if (estudante.getAno() == 5) {
+                pessoaPorAno.add(estudante);
+            }
+        });
+
+        return pessoaPorAno;
+    }
+    
 
     public List<Pessoas> buscarPessoaPorProfissao(String Profissao) {
         List<Pessoas> pessoaComProfissao = new ArrayList<Pessoas>();
@@ -140,6 +177,21 @@ public class Agenda extends Pessoas {
         }
 
         return totalSalario / ListadeContatos.size();
+    }
+    
+    public int ContatoIdadeMedia() {
+
+        if (ListadeContatos.isEmpty()) {
+            return 0; // Retorna 0 se a lista estiver vazia para evitar divisão por zero.
+        }
+
+        int totalDeIdade = 0;
+
+        for (Pessoas Pessoa : ListadeContatos) {
+            totalDeIdade += Pessoa.getIdade();
+        }
+
+        return totalDeIdade / ListadeContatos.size();
     }
 
     @Override
@@ -198,16 +250,20 @@ public class Principal {
 }
 
 
+
 public class Funcionario extends Pessoas {
 
     private Double Salario;
     private String Cargo;
     private String Departamento;
+    private Double bonus;
 
     public Funcionario() {
 
     }
 
+    
+    
     public Funcionario(String nome, int idade, String cpf, String dataNascimento, String profissao, Double salario, String cargo, String departamento) {
         super(nome, idade, cpf, dataNascimento, profissao);
         this.Salario = salario;
@@ -228,7 +284,11 @@ public class Funcionario extends Pessoas {
     }
 
     public void setSalario(Double salario) {
-        Salario = salario;
+        if (Salario >= 0) {
+            Salario = salario;
+        } else {
+            this.Salario = 0.0;
+        }
     }
 
     public void setCargo(String cargo) {
@@ -239,8 +299,22 @@ public class Funcionario extends Pessoas {
         Departamento = departamento;
     }
 
-    @Override
-    public String toString() {
+    public void aumentoSalario(double porcentagem) {
+        this.Salario += porcentagem;
+    }
+
+    public void adicionarBonus(double bonusAdd) {
+        this.bonus += bonusAdd;
+    }
+    
+    public void aplicarBonus() {
+        this.Salario += this.bonus;
+        this.bonus = 0.0;
+    }
+
+
+@Override
+public String toString() {
         return "Funcionario [getSalario()=" + getSalario() + ", getCargo()=" + getCargo() + ", getDepartamento()="
                 + getDepartamento() + "]";
     }
@@ -248,11 +322,13 @@ public class Funcionario extends Pessoas {
 }
 
 
+
 public class Estudante extends Pessoas {
 
     private String Curso = "";
     private int Matricula = 0;
     private int ano = 0;
+    private int promover = 1;
 
     public Estudante() {
 
@@ -286,7 +362,19 @@ public class Estudante extends Pessoas {
     }
 
     public void setAno(int ano) {
-        this.ano = ano;
+        if (ano >= 1 && ano <= 5) {
+            this.ano = ano;
+        } else {
+            this.ano = 0;
+        }
+    }
+
+    public void promoverAno() {
+        if (ano < 5) {
+            this.ano += promover;
+        } else {
+            System.out.println("Erro, valor fornecido é maior ou igual a 5.");
+        }
     }
 
     @Override
